@@ -1,5 +1,7 @@
 import { markdownToSafeHTML } from "@calcom/lib/markdownToSafeHTML";
 
+import { portfolioTheme } from "../lib/portfolioTheme";
+
 const Spacer = () => <p style={{ height: 6 }} />;
 
 export const Info = (props: {
@@ -17,7 +19,7 @@ export const Info = (props: {
   const safeLabel = markdownToSafeHTML(props.label.toString());
 
   const StyledHtmlContent = ({ htmlContent }: { htmlContent: string }) => {
-    const css = "color: '#101010'; font-weight: 400; line-height: 24px; margin: 0;";
+    const css = `color: ${portfolioTheme.color.foreground}; font-weight: 400; line-height: 24px; margin: 0;`;
     return (
       <p
         className="dark:text-darkgray-600 mt-2 text-sm text-gray-500 [&_a]:text-blue-500 [&_a]:underline [&_a]:hover:text-blue-600"
@@ -36,12 +38,13 @@ export const Info = (props: {
     <>
       {props.withSpacer && <Spacer />}
       <div>
-        <p style={{ color: "#101010" }}>
+        <p style={{ color: portfolioTheme.color.foregroundMuted, fontFamily: portfolioTheme.font.mono, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 6px" }}>
           {props.isLabelHTML ? <StyledHtmlContent htmlContent={safeLabel} /> : props.label}
         </p>
         <p
           style={{
-            color: "#101010",
+            color: portfolioTheme.color.foreground,
+            fontFamily: portfolioTheme.font.sans,
             fontWeight: 400,
             lineHeight: "24px",
             whiteSpace: "pre-wrap",

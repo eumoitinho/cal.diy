@@ -1,5 +1,7 @@
 import type { CSSProperties } from "react";
 
+import { portfolioTheme } from "../lib/portfolioTheme";
+
 import EmailCommonDivider from "./EmailCommonDivider";
 
 const EmailScheduledBodyHeaderContent = (props: {
@@ -21,12 +23,13 @@ const EmailScheduledBodyHeaderContent = (props: {
         <div
           data-testid="heading"
           style={{
-            fontFamily: "Roboto, Helvetica, sans-serif",
-            fontSize: 24,
-            fontWeight: 700,
-            lineHeight: "24px",
+            fontFamily: portfolioTheme.font.serif,
+            fontSize: 28,
+            fontWeight: 500,
+            lineHeight: "32px",
+            letterSpacing: "-0.02em",
             textAlign: "center",
-            color: "#111827",
+            color: portfolioTheme.color.foreground,
           }}>
           {props.title}
         </div>
@@ -38,12 +41,12 @@ const EmailScheduledBodyHeaderContent = (props: {
           <div
             data-testid="subHeading"
             style={{
-              fontFamily: "Roboto, Helvetica, sans-serif",
-              fontSize: 16,
+              fontFamily: portfolioTheme.font.sans,
+              fontSize: 15,
               fontWeight: 400,
               lineHeight: "24px",
               textAlign: "center",
-              color: "#4B5563",
+              color: portfolioTheme.color.foregroundMuted,
             }}>
             {props.subtitle}
           </div>

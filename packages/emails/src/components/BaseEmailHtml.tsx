@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-head-element */
+import { portfolioTheme } from "../lib/portfolioTheme";
+
 import BaseTable from "./BaseTable";
 import EmailBodyLogo from "./EmailBodyLogo";
 import EmailHead from "./EmailHead";
@@ -28,8 +30,8 @@ export const BaseEmailHtml = (props: {
   return (
     <Html>
       <EmailHead title={props.subject} />
-      <body style={{ wordSpacing: "normal", backgroundColor: "#F3F4F6" }}>
-        <div style={{ backgroundColor: "#F3F4F6" }}>
+      <body style={{ wordSpacing: "normal", backgroundColor: portfolioTheme.color.surfaceMuted }}>
+        <div style={{ backgroundColor: portfolioTheme.color.surfaceMuted }}>
           <RawHtml
             html={`<!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->`}
           />
@@ -53,10 +55,10 @@ export const BaseEmailHtml = (props: {
             style={{
               margin: "0px auto",
               maxWidth: 600,
-              borderRadius: "8px",
-              border: "1px solid #E5E7EB",
+              borderRadius: "0px",
+              border: `1px solid ${portfolioTheme.color.border}`,
               padding: "2px",
-              backgroundColor: "#FFFFFF",
+              backgroundColor: portfolioTheme.color.surface,
             }}>
             {props.headerType && (
               <EmailSchedulingBodyHeader headerType={props.headerType} headStyles={{ border: 0 }} />
@@ -77,15 +79,19 @@ export const BaseEmailHtml = (props: {
             />
             <div
               style={{
-                background: "#FFFFFF",
-                backgroundColor: "#FFFFFF",
+                background: portfolioTheme.color.surface,
+                backgroundColor: portfolioTheme.color.surface,
                 margin: "0px auto",
                 maxWidth: 600,
               }}>
               <Row
                 align="center"
                 border="0"
-                style={{ background: "#FFFFFF", backgroundColor: "#FFFFFF", width: "100%" }}>
+                style={{
+                  background: portfolioTheme.color.surface,
+                  backgroundColor: portfolioTheme.color.surface,
+                  width: "100%",
+                }}>
                 <td
                   style={{
                     direction: "ltr",
@@ -110,12 +116,12 @@ export const BaseEmailHtml = (props: {
                       <td align="left" style={{ fontSize: 0, padding: "10px 25px", wordBreak: "break-word" }}>
                         <div
                           style={{
-                            fontFamily: "Roboto, Helvetica, sans-serif",
+                            fontFamily: portfolioTheme.font.sans,
                             fontSize: 16,
                             fontWeight: 500,
                             lineHeight: 1,
                             textAlign: "left",
-                            color: "#101010",
+                            color: portfolioTheme.color.foreground,
                           }}>
                           {props.children}
                         </div>
@@ -133,15 +139,19 @@ export const BaseEmailHtml = (props: {
 
             <div
               style={{
-                background: "#FFFFFF",
-                backgroundColor: "#FFFFFF",
+                background: portfolioTheme.color.surface,
+                backgroundColor: portfolioTheme.color.surface,
                 margin: "0px auto",
                 maxWidth: 600,
               }}>
               <Row
                 align="center"
                 border="0"
-                style={{ background: "#FFFFFF", backgroundColor: "#FFFFFF", width: "100%" }}>
+                style={{
+                  background: portfolioTheme.color.surface,
+                  backgroundColor: portfolioTheme.color.surface,
+                  width: "100%",
+                }}>
                 <td
                   style={{
                     direction: "ltr",
@@ -179,11 +189,11 @@ export const BaseEmailHtml = (props: {
                               style={{ fontSize: 0, padding: "10px 25px", wordBreak: "break-word" }}>
                               <div
                                 style={{
-                                  fontFamily: "Roboto, Helvetica, sans-serif",
+                                  fontFamily: portfolioTheme.font.sans,
                                   fontSize: 13,
                                   lineHeight: 1,
                                   textAlign: "left",
-                                  color: "#000000",
+                                  color: portfolioTheme.color.foreground,
                                 }}
                               />
                             </td>

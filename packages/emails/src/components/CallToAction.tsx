@@ -1,3 +1,5 @@
+import { portfolioTheme } from "../lib/portfolioTheme";
+
 import { CallToActionIcon } from "./CallToActionIcon";
 
 export const CallToAction = (props: {
@@ -31,10 +33,10 @@ export const CallToAction = (props: {
     <p
       style={{
         display: "inline-block",
-        background: secondary ? "#FFFFFF" : "#292929",
-        border: secondary ? "1px solid #d1d5db" : "",
-        color: "#ffffff",
-        fontFamily: "Roboto, Helvetica, sans-serif",
+        background: secondary ? portfolioTheme.color.surface : portfolioTheme.color.primary,
+        border: secondary ? `1px solid ${portfolioTheme.color.border}` : "",
+        color: portfolioTheme.color.primaryForeground,
+        fontFamily: portfolioTheme.font.sans,
         fontSize: "0.875rem",
         fontWeight: 500,
         lineHeight: "1rem",
@@ -45,14 +47,14 @@ export const CallToAction = (props: {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         msoPaddingAlt: "0px",
-        borderRadius: "6px",
+        borderRadius: "0px",
         boxSizing: "border-box",
         height: "2.25rem",
       }}>
       {/* @ts-expect-error shared props between href and button */}
       <El
         style={{
-          color: secondary ? "#292929" : "#FFFFFF",
+          color: secondary ? portfolioTheme.color.primary : portfolioTheme.color.primaryForeground,
           textDecoration: "none",
           display: "flex",
           alignItems: "center",

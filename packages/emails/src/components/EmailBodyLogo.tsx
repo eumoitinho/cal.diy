@@ -1,13 +1,13 @@
 import { WEBAPP_URL } from "@calcom/lib/constants";
 
+import { portfolioTheme } from "../lib/portfolioTheme";
+
 import RawHtml from "./RawHtml";
 import Row from "./Row";
 
 const CommentIE = ({ html = "" }) => <RawHtml html={`<!--[if mso | IE]>${html}<![endif]-->`} />;
 
 const EmailBodyLogo = () => {
-  const image = `${WEBAPP_URL}/emails/logo.png`;
-
   return (
     <>
       <CommentIE
@@ -29,7 +29,7 @@ const EmailBodyLogo = () => {
               className="mj-column-per-100 mj-outlook-group-fix"
               style={{
                 fontSize: "0px",
-                textAlign: "left",
+                textAlign: "center",
                 direction: "ltr",
                 display: "inline-block",
                 verticalAlign: "top",
@@ -44,27 +44,19 @@ const EmailBodyLogo = () => {
                     paddingTop: "32px",
                     wordBreak: "break-word",
                   }}>
-                  <Row border="0" style={{ borderCollapse: "collapse", borderSpacing: "0px" }}>
-                    <td style={{ width: "89px" }}>
-                      <a href={WEBAPP_URL} target="_blank" rel="noreferrer">
-                        <img
-                          height="19"
-                          src={image}
-                          style={{
-                            border: "0",
-                            display: "block",
-                            outline: "none",
-                            textDecoration: "none",
-                            height: "19px",
-                            width: "100%",
-                            fontSize: "13px",
-                          }}
-                          width="89"
-                          alt=""
-                        />
-                      </a>
-                    </td>
-                  </Row>
+                  <a
+                    href={WEBAPP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      fontFamily: portfolioTheme.font.mono,
+                      fontSize: "13px",
+                      color: portfolioTheme.color.foreground,
+                      textDecoration: "none",
+                      letterSpacing: "0.02em",
+                    }}>
+                    {"<moitinho.dev/>"}
+                  </a>
                 </td>
               </Row>
             </div>

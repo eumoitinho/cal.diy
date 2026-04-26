@@ -1,4 +1,13 @@
-FROM --platform=$BUILDPLATFORM node:20 AS builder
+# NOTE: deliberately not pinning to $BUILDPLATFORM. Cal.com depends on several
+# native modules (sharp, @next/swc, @prisma/engines) whose binaries are
+# selected via npm/yarn optional deps based on the current architecture. If
+# the builder runs on $BUILDPLATFORM (e.g. linux/arm64 on Apple Silicon) those
+# binaries get baked into node_modules for the wrong arch, then copied into
+# builder-two/runner (linux/amd64) where they fail to load and hang the SSR
+# request. Forcing the builder to use $TARGETPLATFORM costs build time (QEMU
+# emulation when cross-building) but guarantees every native dep matches the
+# image arch.
+FROM node:20 AS builder
 
 WORKDIR /calcom
 
@@ -67,18 +76,6 @@ COPY --from=builder /calcom/packages/prisma/schema.prisma ./prisma/schema.prisma
 COPY scripts scripts
 RUN chmod +x scripts/*
 
-# The `builder` stage runs on $BUILDPLATFORM (e.g. linux/arm64 on Apple Silicon
-# hosts) so Yarn only installs the matching arch-specific optional deps. Once
-# we land in builder-two (which uses the target $TARGETPLATFORM, here
-# linux/amd64), the Next.js native SWC binary for amd64 is missing — Next then
-# tries to download it at runtime via `yarn config get registry`, fails, and
-# the server hangs on the first SSR request. Force-install the matching SWC
-# binary for the target arch right here.
-RUN NEXT_VERSION=$(node -p "require('./apps/web/node_modules/next/package.json').version") && \
-    cd apps/web && \
-    npm install --no-save --no-package-lock --no-audit --no-fund --prefix=. \
-      "@next/swc-linux-x64-gnu@${NEXT_VERSION}" && \
-    ls node_modules/@next/swc-linux-x64-gnu/ > /dev/null
 
 # Save value used during this build stage. If NEXT_PUBLIC_WEBAPP_URL and BUILT_NEXT_PUBLIC_WEBAPP_URL differ at
 # run-time, then start.sh will find/replace static values again.
